@@ -2,7 +2,7 @@
 Nginx + PHP-FPM 7.2 + MySQL 5.7
 
 ## Quick start
-Copy/extract magento2 to `magento` dir  \
+Copy/extract magento2 to `magento` directory  \
 `docker-compose up -d`\
 Open `http://127.0.0.1:8081` (default opening phpinfo())
 
