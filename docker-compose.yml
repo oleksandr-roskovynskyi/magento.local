@@ -1,0 +1,44 @@
+version: "3.1"
+
+services:
+  fpm:
+    build: ./.docker/php-fpm
+    container_name: fpm
+    working_dir: /app
+    volumes:
+      - ./magento:/app
+      - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+
+  nginx:
+    image: nginx:1.17.2-alpine
+    container_name: nginx
+    working_dir: /app
+    ports:
+      - "8081:80"
+    volumes:
+      - ./magento:/app
+      - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./.docker/nginx/Logs:/var/log/nginx/
+      - ./.docker/nginx/html:/usr/share/nginx/html/
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    container_name: mysql
+    restart: always
+    volumes:
+      - ./.docker/.mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=magento
+      - MYSQL_USER=magento
+      - MYSQL_PASSWORD=magento
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    ports:
+      - 8090:80
+    links:
+      - mysql:db
