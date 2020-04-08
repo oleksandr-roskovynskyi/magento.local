@@ -1,13 +1,13 @@
-#Docker-composer for Magento 2
+# Docker-composer for Magento 2
 Nginx + PHP-FPM 7.2 + MySQL 5.7
 
-##Quick start
+## Quick start
 Copy/extract magento2 to `magento` dir  \
 `docker-compose up -d`\
 Open `http://127.0.0.1:8081` (default opening phpinfo())
 
 
-###Other
+### Other
 docker-compose up -d
 docker-compose up --build -d
 docker-compose up build --no-cache
